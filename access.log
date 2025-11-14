@@ -1,0 +1,18 @@
+# Tráfico Normal y Repetido (IP: 192.168.1.10)
+192.168.1.10 - - [12/Nov/2025:10:00:01 -0500] "GET /index.html HTTP/1.1" 200 1024 "-" "Mozilla/5.0 (...)"
+192.168.1.10 - - [12/Nov/2025:10:00:02 -0500] "GET /styles.css HTTP/1.1" 200 500 "-" "Mozilla/5.0 (...)"
+10.0.0.5 - - [12/Nov/2025:10:00:03 -0500] "GET /about.html HTTP/1.1" 200 800 "-" "Chrome/90.0.4430.212"
+192.168.1.10 - - [12/Nov/2025:10:00:04 -0500] "GET /scripts.js HTTP/1.1" 200 750 "-" "Mozilla/5.0 (...)"
+
+# Errores 404 (para pruebas de escaneo)
+10.0.0.25 - - [12/Nov/2025:10:00:05 -0500] "GET /wp-admin/login.php HTTP/1.1" 404 200 "-" "Nmap Scripting Engine"
+10.0.0.25 - - [12/Nov/2025:10:00:06 -0500] "GET /admin/dashboard HTTP/1.1" 404 200 "-" "Nmap Scripting Engine"
+192.168.1.15 - - [12/Nov/2025:10:00:07 -0500] "GET /imagen_inexistente.jpg HTTP/1.1" 404 200 "-" "Mozilla/5.0 (...)"
+
+# Errores 500 y 403
+192.168.1.10 - - [12/Nov/2025:10:00:08 -0500] "POST /api/proceso_fallido HTTP/1.1" 500 150 "-" "Mozilla/5.0 (...)"
+10.0.0.5 - - [12/Nov/2025:10:00:09 -0500] "GET /area_restringida HTTP/1.1" 403 300 "-" "Chrome/90.0.4430.212"
+
+# Intentos de Ataque (para probar la detección de seguridad)
+203.0.113.44 - - [12/Nov/2025:10:00:10 -0500] "GET /producto.php?id=1' UNION SELECT 1,2,3-- HTTP/1.1" 400 300 "-" "SQL-Injected-Tester"
+203.0.113.44 - - [12/Nov/2025:10:00:11 -0500] "GET /buscador?q=<script>alert('XSS')</script> HTTP/1.1" 400 300 "-" "XSS-Tester-Bot"
